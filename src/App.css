@@ -1,0 +1,14 @@
+.app {
+  min-height: 100vh;
+  display: flex;
+  align-items: stretch;
+}
+
+.workspace {
+  width: min(1200px, 100%);
+  margin: 0 auto;
+  padding: 40px 24px;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}

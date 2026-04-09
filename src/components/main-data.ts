@@ -3,7 +3,10 @@ export const rewardCards = [
   { title: 'Скидка', value: '30%', tone: 'red' },
   { title: 'Бесплатные', value: '6 часов', tone: 'blue' },
   { title: 'Скидка', value: '20%', tone: 'red' },
+  { title: 'Скидка', value: '10%', tone: 'red' },
+  { title: 'Бесплатные', value: '12 часов', tone: 'blue' },
   { title: 'Попробуй', value: 'завтра', tone: 'burst' },
+  { title: 'Скидка', value: '40%', tone: 'red' },
 ] as const;
 
 export const questCards = [
@@ -15,7 +18,7 @@ export const questCards = [
     icon: '✎',
   },
   {
-    title: 'Поделитесь с друзьями',
+    title: 'Поделиться с друзьями',
     description:
       'Пригласите друга в HiroVPN и получите 1 день VPN бесплатно!',
     button: 'Поделиться',
@@ -45,7 +48,7 @@ export const questCards = [
   {
     title: 'Подписаться на TG-канал',
     description:
-      'Подпишитесь на канал HiroVPN, получайте новости и апдейты самыми первыми, а так же 1 день VPN бесплатно!',
+      'Подпишитесь на канал HiroVPN, получайте новости и апдейты самыми первыми, а также 1 день VPN бесплатно!',
     button: 'Подписаться',
     icon: '◉',
   },

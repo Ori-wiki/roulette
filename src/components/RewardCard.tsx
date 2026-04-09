@@ -3,14 +3,27 @@ import card2Image from '../assets/card2.png';
 import card3Image from '../assets/card3.png';
 import type { RewardCardItem } from './main-data';
 
-export function RewardCard({ title, value, tone }: RewardCardItem) {
+type RewardCardProps = RewardCardItem & {
+  active?: boolean;
+};
+
+export function RewardCard({
+  title,
+  value,
+  tone,
+  active = false,
+}: RewardCardProps) {
   const rewardImage =
     tone === 'blue' ? card2Image : tone === 'burst' ? card3Image : card1Image;
 
   return (
-    <article className='flex h-52 w-30 min-w-30 flex-col justify-between rounded-[10px] border border-white/10 bg-[#22252c] py-4'>
-      <div className='space-y-1 text-left'>
-        <p className='font-alumni font-semibold text-[24px] uppercase text-center leading-none text-[#f6f2ea]'>
+    <article
+      className={`flex h-52 w-30 min-w-30 flex-col justify-between rounded-[10px] border bg-[#22252c] py-4 transition-transform duration-300 ${
+        active ? 'border-transparent scale-[1.01]' : 'border-white/65'
+      }`}
+    >
+      <div className='space-y-1'>
+        <p className='text-center font-alumni text-[24px] font-semibold uppercase leading-none text-[#f6f2ea]'>
           {title}
         </p>
       </div>
@@ -19,7 +32,7 @@ export function RewardCard({ title, value, tone }: RewardCardItem) {
         <img
           src={rewardImage}
           alt='Награда'
-          className='h-30 w-30 shrink-0 object-contain'
+          className='h-30 w-30 shrink-0 object-fill'
         />
       </div>
 

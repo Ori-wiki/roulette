@@ -1,18 +1,19 @@
 import cardImage from '../assets/card_img.png';
-import miniGiftImage from '../assets/mini_gift.png';
 import vectorIcon from '../assets/Vector.svg';
+import { FortuneWheelProgress } from './FortuneWheelProgress';
 import { RewardCard } from './RewardCard';
-import { rewardCards } from './main-data';
+import {
+  CARD_HEIGHT,
+  CARD_STEP,
+  CARD_WIDTH,
+  SPIN_DURATION_MS,
+  useFortuneWheel,
+} from './useFortuneWheel';
 
 export function FortuneWheelCard() {
-  const rouletteCards = [
-    rewardCards[rewardCards.length - 1],
-    ...rewardCards,
-    rewardCards[0],
-  ];
-
-  const currentDay = 3;
-  const progressLeadOffset = 'clamp(12px, 3vw, 16px)';
+  const { reelCards, activeIndex, isSpinning, shouldAnimate, handleSpin } =
+    useFortuneWheel();
+  const currentDay = 1;
 
   return (
     <div className='w-full min-w-0'>
@@ -33,22 +34,44 @@ export function FortuneWheelCard() {
           />
         </div>
 
-        <div className='mt-4 -mx-4 overflow-hidden min-[768px]:-mx-6'>
-          <div className='flex w-max -translate-x-15.75 flex-nowrap gap-1.5 px-4 min-[768px]:px-6'>
-            {rouletteCards.map((card, index) => (
-              <RewardCard
-                key={`${card.title}-${card.value}-${index}`}
-                {...card}
-              />
-            ))}
+        <div className='relative mt-4 -mx-4 pb-7 min-[768px]:-mx-6'>
+          <div className='overflow-hidden'>
+            <div
+              className='flex w-max flex-nowrap gap-1.5'
+              style={{
+                marginLeft: '50%',
+                transform: `translateX(-${
+                  activeIndex * CARD_STEP + CARD_WIDTH / 2
+                }px)`,
+                transition: shouldAnimate
+                  ? `transform ${SPIN_DURATION_MS}ms cubic-bezier(0.16, 1, 0.3, 1)`
+                  : 'none',
+              }}
+            >
+              {reelCards.map(({ reelIndex, ...card }) => (
+                <RewardCard
+                  key={`${card.title}-${card.value}-${reelIndex}`}
+                  {...card}
+                  active={!isSpinning && reelIndex === activeIndex}
+                />
+              ))}
+            </div>
           </div>
+
+          <div
+            className='pointer-events-none absolute left-1/2 top-0 z-10 -translate-x-1/2 rounded-[10px] border-2 border-[#FF0633] shadow-[0_0_0_1px_rgba(255,6,51,0.5)]'
+            style={{ width: CARD_WIDTH, height: CARD_HEIGHT }}
+          />
+          <div className='pointer-events-none absolute bottom-0 left-1/2 z-10 h-0 w-0 -translate-x-1/2 border-x-12 border-t-28 border-x-transparent border-t-[#FF0633]' />
         </div>
 
         <button
-          className='my-4 flex h-9 w-full items-center justify-center gap-2 rounded-full bg-[#FF0633] px-4 font-alumni text-[24px] uppercase leading-none text-[#FDFDFD] transition-colors duration-200 hover:bg-[#ff2d55] cursor-pointer min-[768px]:h-10'
+          className='my-4 flex h-9 w-full items-center justify-center gap-2 rounded-full bg-[#FF0633] px-4 font-alumni text-[24px] uppercase leading-none text-[#FDFDFD] transition-colors duration-200 hover:bg-[#ff2d55] disabled:cursor-default disabled:opacity-80 min-[768px]:h-10'
           type='button'
+          onClick={handleSpin}
+          disabled={isSpinning}
         >
-          <span>Испытать удачу</span>
+          <span>{isSpinning ? 'Крутится...' : 'Испытать удачу'}</span>
           <img
             src={vectorIcon}
             alt='Подарок'
@@ -61,35 +84,7 @@ export function FortuneWheelCard() {
           гарантированный 1 день подписки!
         </p>
 
-        <div className='relative mt-3 flex items-center justify-between rounded-[10px] border border-[#2E3139] bg-[#1d2026] px-4 py-2 min-[768px]:pr-4 min-[768px]:pl-8'>
-          <div
-            className='absolute left-0 top-1/2 h-4.5 -translate-y-1/2 bg-[#FF0633]'
-            style={{
-              width: `calc(((100% - ${progressLeadOffset}) / 7) * ${currentDay} + ${progressLeadOffset})`,
-            }}
-          />
-          {['1', '2', '3', '4', '5', '6'].map((day) => (
-            <div
-              key={day}
-              className='relative flex min-w-7 items-center justify-center min-[768px]:min-w-8'
-            >
-              <span className='relative z-10 font-alumni text-[30px] font-semibold leading-none min-[768px]:text-[44px]'>
-                {day}
-              </span>
-            </div>
-          ))}
-
-          <div className='relative flex min-w-7 items-center justify-center min-[768px]:min-w-8'>
-            <img
-              src={miniGiftImage}
-              alt='Подарок за 7 день'
-              className='h-8 w-8 object-contain min-[768px]:h-10 min-[768px]:w-10'
-            />
-            <span className='absolute inset-0 flex items-center justify-center font-alumni text-[28px] font-semibold leading-none text-[#F6F2EA] min-[768px]:text-[40px]'>
-              7
-            </span>
-          </div>
-        </div>
+        <FortuneWheelProgress currentDay={currentDay} />
       </article>
     </div>
   );

@@ -42,7 +42,10 @@ export function Header() {
       <div className='hidden w-full items-center justify-between gap-4 min-[1025px]:flex'>
         <Wordmark />
 
-        <nav className='flex items-center gap-4' aria-label='Основная навигация'>
+        <nav
+          className='flex items-center gap-4 text-[20px]'
+          aria-label='Основная навигация'
+        >
           <a className={`${navItemClass} opacity-95`} href='#faq'>
             FAQ
           </a>
@@ -62,7 +65,7 @@ export function Header() {
 
         <div className='flex items-center gap-4'>
           <a
-            className='inline-flex h-12 w-41.75 shrink-0 items-center justify-center rounded-full border border-[rgba(246,242,234,0.82)] text-center font-kelly leading-none text-[#F6F2EA] no-underline transition-all duration-200 hover:border-white hover:bg-white/6 hover:text-white'
+            className='inline-flex h-12 w-41.75 shrink-0 items-center justify-center rounded-full border border-[rgba(246,242,234,0.82)] text-center text-[20px] font-kelly leading-none text-[#F6F2EA] no-underline transition-all duration-200 hover:border-white hover:bg-white/6 hover:text-white'
             href='#account'
           >
             Аккаунт
@@ -70,7 +73,7 @@ export function Header() {
 
           <div className='relative shrink-0'>
             <button
-              className='inline-flex h-12 w-28 cursor-pointer items-center justify-center gap-2 rounded-full border-0 bg-transparent p-0 font-kelly leading-none text-[#F6F2EA] transition-all duration-200 hover:bg-white/6 hover:text-white'
+              className='inline-flex h-12 w-28 text-[20px] cursor-pointer items-center justify-center gap-2 rounded-full border-0 bg-transparent p-0 font-kelly leading-none text-[#F6F2EA] transition-all duration-200 hover:bg-white/6 hover:text-white'
               type='button'
               aria-label='Смена языка'
               aria-expanded={isLanguageOpen}

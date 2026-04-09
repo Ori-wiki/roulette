@@ -18,7 +18,7 @@ export function RewardCard({
 
   return (
     <article
-      className={`flex h-52 w-30 min-w-30 flex-col justify-between rounded-[10px] border bg-[#22252c] py-4 transition-transform duration-300 ${
+      className={`flex h-52 w-30 min-w-30 flex-col justify-between rounded-[10px] border bg-[#1E2025] py-4 transition-transform duration-300 ${
         active ? 'border-transparent scale-[1.01]' : 'border-white/65'
       }`}
     >
@@ -36,7 +36,7 @@ export function RewardCard({
         />
       </div>
 
-      <p className='text-center font-kelly text-[32px] leading-none tracking-[0] whitespace-nowrap text-[#C3C2BD]'>
+      <p className='text-center font-kelly whitespace-nowrap text-[32px] leading-none tracking-[0] text-[#C3C2BD]'>
         {value}
       </p>
     </article>

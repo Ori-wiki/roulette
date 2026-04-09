@@ -61,12 +61,17 @@ export function FortuneWheelCard() {
           <div
             className='pointer-events-none absolute left-1/2 top-0 z-10 -translate-x-1/2 rounded-[10px] border-2 border-[#FF0633] shadow-[0_0_0_1px_rgba(255,6,51,0.5)]'
             style={{ width: CARD_WIDTH, height: CARD_HEIGHT }}
-          />
-          <div className='pointer-events-none absolute bottom-0 left-1/2 z-10 h-0 w-0 -translate-x-1/2 border-x-12 border-t-28 border-x-transparent border-t-[#FF0633]' />
+          >
+            <div
+              className='absolute -bottom-0.5 left-1/2 h-7 w-6 -translate-x-1/2 bg-[#FF0633]'
+              style={{ clipPath: 'polygon(50% 0, 92% 100%, 8% 100%)' }}
+              aria-hidden='true'
+            />
+          </div>
         </div>
 
         <button
-          className='my-4 flex h-9 w-full items-center justify-center gap-2 rounded-full bg-[#FF0633] px-4 font-alumni text-[24px] uppercase leading-none text-[#FDFDFD] transition-colors duration-200 hover:bg-[#ff2d55] disabled:cursor-default disabled:opacity-80 min-[768px]:h-10'
+          className='my-4 flex h-9 w-full items-center justify-center gap-2 rounded-full bg-[#FF0633] px-4 font-alumni text-[24px] uppercase leading-none text-[#FDFDFD] transition-colors duration-200 hover:bg-[#ff2d55] cursor-pointer disabled:cursor-default disabled:opacity-80 min-[768px]:h-10'
           type='button'
           onClick={handleSpin}
           disabled={isSpinning}

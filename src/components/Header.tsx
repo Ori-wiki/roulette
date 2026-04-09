@@ -73,7 +73,7 @@ export function Header() {
 
           <div className='relative shrink-0'>
             <button
-              className='inline-flex h-12 w-28 text-[20px] cursor-pointer items-center justify-center gap-2 rounded-full border-0 bg-transparent p-0 font-kelly leading-none text-[#F6F2EA] transition-all duration-200 hover:bg-white/6 hover:text-white'
+              className='inline-flex h-12 w-28 cursor-pointer items-center justify-center gap-2 rounded-full border-0 bg-transparent p-0 font-kelly leading-none text-[#F6F2EA] transition-all duration-200 hover:bg-white/6 hover:text-white'
               type='button'
               aria-label='Смена языка'
               aria-expanded={isLanguageOpen}

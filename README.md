@@ -1,75 +1,92 @@
-# React + TypeScript + Vite
+# Roulette
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Тестовый фронтенд-проект на `React + TypeScript + Vite` с адаптивной страницей аккаунта HIRO VPN.
 
-Currently, two official plugins are available:
+В проекте реализованы:
+- шапка с desktop/mobile навигацией;
+- главный экран аккаунта;
+- карточка "Колесо фортуны" с анимацией прокрутки;
+- прогресс 7-дневной серии;
+- блок с промо-материалами;
+- сетка квестов;
+- футер с загрузками, способами оплаты и поддержкой.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Стек
 
-## React Compiler
+- `React 19`
+- `TypeScript`
+- `Vite`
+- `Tailwind CSS v4`
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+## Запуск проекта
 
-Note: This will impact Vite dev & build performances.
+Установка зависимостей:
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Запуск dev-сервера:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run dev
 ```
+
+Сборка production-версии:
+
+```bash
+npm run build
+```
+
+Локальный предпросмотр сборки:
+
+```bash
+npm run preview
+```
+
+Проверка линтером:
+
+```bash
+npm run lint
+```
+
+## Структура проекта
+
+```text
+src/
+  assets/                 Статические изображения и иконки
+  components/
+    Header.tsx            Шапка и навигация
+    Main.tsx              Основной layout страницы
+    FortuneWheelCard.tsx  Карточка рулетки
+    FortuneWheelProgress.tsx Прогресс 7-дневной серии
+    RewardCard.tsx        Карточка приза в рулетке
+    useFortuneWheel.ts    Логика прокрутки рулетки
+    QuestActionCard.tsx   Карточка задания
+    PromoAside.tsx        Промо-блок рядом с рулеткой
+    Footer.tsx            Нижняя часть страницы
+    main-data.ts          Данные для призов и квестов
+  App.tsx                 Корневой компонент
+  index.css               Глобальные стили и theme tokens
+```
+
+## Поведение рулетки
+
+Логика рулетки находится в [`src/components/useFortuneWheel.ts`].
+
+Что делает хук:
+- формирует повторяющийся список карточек для эффекта бесконечной ленты;
+- хранит активный индекс;
+- запускает анимацию прокрутки;
+- после завершения нормализует позицию, чтобы лента не "уезжала" слишком далеко;
+- использует общую константу `SPIN_DURATION_MS` для синхронизации таймера и CSS-анимации.
+
+## Компонентная структура
+
+Проект уже частично разбит на небольшие компоненты:
+- `FortuneWheelCard` отвечает за композицию блока рулетки;
+- `FortuneWheelProgress` отвечает только за прогресс серии (контролируется через const currentDay);
+- `RewardCard` отвечает только за отображение одного приза;
+- `QuestActionCard` рендерит отдельную карточку задания.
+
+Такую структуру удобно расширять: например, можно отдельно доработать вероятности выпадения призов, анимации или адаптивность без переписывания всей страницы.

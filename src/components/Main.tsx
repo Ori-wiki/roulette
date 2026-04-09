@@ -17,7 +17,7 @@ export function Main() {
             Квесты
           </h2>
           <button
-            className='inline-flex h-8 w-8 items-center justify-center rounded-full text-[#f6f2ea] transition-colors duration-200 hover:bg-white/6 cursor-pointer'
+            className='inline-flex h-8 w-8 cursor-pointer items-center justify-center rounded-full text-[#f6f2ea] transition-colors duration-200 hover:bg-white/6'
             type='button'
             aria-label='Закрыть раздел'
           >
